@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: Colors.BLACK,
   },
   input: {
     marginTop: 10,
@@ -223,7 +224,8 @@ const SignupScreen = () => {
           <View>
             <TouchableOpacity
               style={signupButtonStyle}
-              onPress={onPressSignupButton}>
+              onPress={onPressSignupButton}
+              disabled={!signupButtonEnabled}>
               <Text style={styles.signupButtonText}>회원 가입</Text>
             </TouchableOpacity>
             <TouchableOpacity
