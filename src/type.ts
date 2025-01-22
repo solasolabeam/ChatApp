@@ -7,3 +7,7 @@ export interface User {
   email: string;
   name: string;
 }
+
+export enum Collections {
+  USER = 'users',
+}
