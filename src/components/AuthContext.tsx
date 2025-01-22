@@ -11,7 +11,7 @@ export interface AuthContextProp {
 const AuthContext = createContext<AuthContextProp>({
   initialized: false,
   user: null,
-  sigup: async () => {},
+  signup: async () => {},
   processingSignup: false,
 });
 
