@@ -1,7 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import Screen from '../components/Screen';
 import validator from 'validator';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Colors from '../modules/Color';
 
 const styles = StyleSheet.create({
@@ -28,6 +35,30 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: Colors.RED,
     marginTop: 4,
+  },
+  signupButton: {
+    backgroundColor: Colors.BLACK,
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 20,
+  },
+  signupButtonText: {
+    color: Colors.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  disabledSignupButton: {
+    backgroundColor: Colors.GRAY,
+  },
+  signinTextButton: {
+    marginTop: 5,
+    alignItems: 'center',
+    padding: 10,
+    color: Colors.BLACK,
+  },
+  signinButtonText: {
+    fontSize: 16,
+    color: Colors.BLACK,
   },
 });
 
@@ -95,6 +126,31 @@ const SignupScreen = () => {
   const onChangeNameText = useCallback((text: string) => {
     setName(text);
   }, []);
+
+  const signupButtonEnabled = useMemo(() => {
+    return (
+      emailErrorText === null &&
+      passwordErrorText == null &&
+      confirmedPasswordErrorText == null &&
+      nameErrorText == null
+    );
+  }, [
+    emailErrorText,
+    passwordErrorText,
+    confirmedPasswordErrorText,
+    nameErrorText,
+  ]);
+
+  const signupButtonStyle = useMemo(() => {
+    if (signupButtonEnabled) {
+      return styles.signupButton;
+    }
+    return [styles.signupButton, styles.disabledSignupButton];
+  }, [signupButtonEnabled]);
+
+  const onPressSignupButton = useCallback(() => {}, []);
+  const onPressSigninButton = useCallback(() => {}, []);
+
   return (
     <Screen title="회원가입">
       <ScrollView style={styles.container}>
@@ -144,6 +200,18 @@ const SignupScreen = () => {
           {nameErrorText && (
             <Text style={styles.errorText}>{nameErrorText}</Text>
           )}
+        </View>
+        <View>
+          <TouchableOpacity
+            style={signupButtonStyle}
+            onPress={onPressSignupButton}>
+            <Text style={styles.signupButtonText}>회원 가입</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.signinTextButton}
+            onPress={onPressSigninButton}>
+            <Text style={styles.signinButtonText}>이미 계정이 있으신가요</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </Screen>
