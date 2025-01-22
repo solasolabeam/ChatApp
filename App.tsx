@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { RootStackParamList } from './src/type';
 import SignupScreen from './src/SignupScreen/SignupScreen';
+import AuthProvider from './src/components/AuthProvider';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,6 +25,10 @@ const Screen = () => {
 };
 
 const App = () => {
-  return <Screen />;
+  return (
+    <AuthProvider>
+      <Screen />
+    </AuthProvider>
+  );
 };
 export default App;
