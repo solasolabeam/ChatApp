@@ -1,7 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import Screen from '../components/Screen';
 import validator from 'validator';
 import {
+  ActivityIndicator,
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -9,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import Colors from '../modules/Color';
+import AuthContext from '../components/AuthContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -50,11 +53,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  signingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 const SigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signin, processingSignin } = useContext(AuthContext);
 
   const emailErrorText = useMemo(() => {
     if (email.length === 0) {
@@ -96,42 +105,56 @@ const SigninScreen = () => {
     return [styles.signinButton, styles.disabledSigninButton];
   }, [signinButtonEnabled]);
 
-  const onPressSigninButton = useCallback(() => {}, []);
+  const onPressSigninButton = useCallback(async () => {
+    try {
+      await signin(email, password);
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  }, [email, password, signin]);
 
   return (
     <Screen title="로그인">
       <View style={styles.container}>
-        <View style={styles.section}>
-          <Text style={styles.title}>이메일</Text>
-          <TextInput
-            value={email}
-            style={styles.input}
-            onChangeText={onChangeEmailText}
-          />
-          {emailErrorText && (
-            <Text style={styles.errorText}>{emailErrorText}</Text>
-          )}
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.title}>비밀번호</Text>
-          <TextInput
-            value={password}
-            style={styles.input}
-            secureTextEntry
-            onChangeText={onChangePasswordText}
-          />
-          {passwordErrorText && (
-            <Text style={styles.errorText}>{passwordErrorText}</Text>
-          )}
-        </View>
-        <View>
-          <TouchableOpacity
-            style={signinButtonStyle}
-            onPress={onPressSigninButton}
-            disabled={!signinButtonEnabled}>
-            <Text style={styles.signinButtonText}>로그인</Text>
-          </TouchableOpacity>
-        </View>
+        {processingSignin ? (
+          <View style={styles.signingContainer}>
+            <ActivityIndicator />
+          </View>
+        ) : (
+          <>
+            <View style={styles.section}>
+              <Text style={styles.title}>이메일</Text>
+              <TextInput
+                value={email}
+                style={styles.input}
+                onChangeText={onChangeEmailText}
+              />
+              {emailErrorText && (
+                <Text style={styles.errorText}>{emailErrorText}</Text>
+              )}
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.title}>비밀번호</Text>
+              <TextInput
+                value={password}
+                style={styles.input}
+                secureTextEntry
+                onChangeText={onChangePasswordText}
+              />
+              {passwordErrorText && (
+                <Text style={styles.errorText}>{passwordErrorText}</Text>
+              )}
+            </View>
+            <View>
+              <TouchableOpacity
+                style={signinButtonStyle}
+                onPress={onPressSigninButton}
+                disabled={!signinButtonEnabled}>
+                <Text style={styles.signinButtonText}>로그인</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </View>
     </Screen>
   );
