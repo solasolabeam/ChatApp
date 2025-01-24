@@ -48,7 +48,7 @@ interface ScreenProps {
 }
 
 const Screen = ({ children, title }: ScreenProps) => {
-  const { goBack } = useNavigation();
+  const { goBack, canGoBack } = useNavigation();
   const onPressBackButton = useCallback(() => {
     goBack();
   }, [goBack]);
@@ -56,9 +56,11 @@ const Screen = ({ children, title }: ScreenProps) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.left}>
-          <TouchableOpacity onPress={onPressBackButton}>
-            <Text style={styles.backButtonText}>{'Back'}</Text>
-          </TouchableOpacity>
+          {canGoBack() && (
+            <TouchableOpacity onPress={onPressBackButton}>
+              <Text style={styles.backButtonText}>{'Back'}</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.center}>
           <Text style={styles.headerTitle}>{title}</Text>
