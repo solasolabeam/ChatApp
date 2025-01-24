@@ -1,6 +1,13 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Colors from '../modules/Color';
+import { useNavigation } from '@react-navigation/native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -11,6 +18,8 @@ const styles = StyleSheet.create({
   },
   left: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   center: {
     flex: 3,
@@ -28,6 +37,10 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
   },
+  backButtonText: {
+    fontSize: 12,
+    color: Colors.BLACK,
+  },
 });
 interface ScreenProps {
   title?: string;
@@ -35,10 +48,18 @@ interface ScreenProps {
 }
 
 const Screen = ({ children, title }: ScreenProps) => {
+  const { goBack } = useNavigation();
+  const onPressBackButton = useCallback(() => {
+    goBack();
+  }, [goBack]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.left} />
+        <View style={styles.left}>
+          <TouchableOpacity onPress={onPressBackButton}>
+            <Text style={styles.backButtonText}>{'Back'}</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.center}>
           <Text style={styles.headerTitle}>{title}</Text>
         </View>
