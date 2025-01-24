@@ -1,7 +1,13 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import Screen from '../components/Screen';
 import validator from 'validator';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Colors from '../modules/Color';
 
 const styles = StyleSheet.create({
@@ -29,6 +35,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: Colors.RED,
     marginTop: 4,
+  },
+  signinButton: {
+    backgroundColor: Colors.BLACK,
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 20,
+  },
+  disabledSigninButton: {
+    backgroundColor: Colors.GRAY,
+  },
+  signinButtonText: {
+    color: Colors.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
@@ -65,6 +85,19 @@ const SigninScreen = () => {
     setPassword(text);
   }, []);
 
+  const signinButtonEnabled = useMemo(() => {
+    return emailErrorText === null && passwordErrorText == null;
+  }, [emailErrorText, passwordErrorText]);
+
+  const signinButtonStyle = useMemo(() => {
+    if (signinButtonEnabled) {
+      return styles.signinButton;
+    }
+    return [styles.signinButton, styles.disabledSigninButton];
+  }, [signinButtonEnabled]);
+
+  const onPressSigninButton = useCallback(() => {}, []);
+
   return (
     <Screen title="로그인">
       <View style={styles.container}>
@@ -90,6 +123,14 @@ const SigninScreen = () => {
           {passwordErrorText && (
             <Text style={styles.errorText}>{passwordErrorText}</Text>
           )}
+        </View>
+        <View>
+          <TouchableOpacity
+            style={signinButtonStyle}
+            onPress={onPressSigninButton}
+            disabled={!signinButtonEnabled}>
+            <Text style={styles.signinButtonText}>로그인</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Screen>
