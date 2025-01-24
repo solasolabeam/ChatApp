@@ -9,6 +9,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [processingSignup, setProcessingSignup] = useState(false);
+  const [processingSignin, setProcessingSignin] = useState(false);
+
   useEffect(() => {
     const unsubsribe = auth().onUserChanged(async fbUser => {
       if (fbUser != null) {
@@ -51,14 +53,25 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     [],
   );
 
+  const signin = useCallback(async (email: string, password: string) => {
+    try {
+      setProcessingSignin(true);
+      await auth().signInWithEmailAndPassword(email, password);
+    } finally {
+      setProcessingSignin(false);
+    }
+  }, []);
+
   const value = useMemo(() => {
     return {
       initialized,
       user,
       signup,
       processingSignup,
+      signin,
+      processingSignin,
     };
-  }, [initialized, user, signup, processingSignup]);
+  }, [initialized, user, signup, processingSignup, signin, processingSignin]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
