@@ -14,12 +14,17 @@ import AuthProvider from './src/components/AuthProvider';
 import SigninScreen from './src/SigninScreen/SiginScreen';
 import AuthContext from './src/components/AuthContext';
 import HomeScreen from './src/HomeScreen/HomeScreen';
+import LoadingScreen from './src/LoadingScreen/LoadingScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Screen = () => {
-  const { user, processingSignin, processingSignup } = useContext(AuthContext);
+  const { user, processingSignin, processingSignup, initialized } =
+    useContext(AuthContext);
   const renderRootStack = useCallback(() => {
+    if (!initialized) {
+      return <Stack.Screen name="Loading" component={LoadingScreen} />;
+    }
     if (user != null && !processingSignin && !processingSignup) {
       // login
       return <Stack.Screen name="Home" component={HomeScreen} />;
@@ -27,11 +32,11 @@ const Screen = () => {
     // logout
     return (
       <>
-        <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} /> X
         <Stack.Screen name="Signin" component={SigninScreen} />
       </>
     );
-  }, [user, processingSignin, processingSignup]);
+  }, [user, processingSignin, processingSignup, initialized]);
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
