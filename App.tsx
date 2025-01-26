@@ -32,7 +32,7 @@ const Screen = () => {
     // logout
     return (
       <>
-        <Stack.Screen name="Signup" component={SignupScreen} /> X
+        <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Signin" component={SigninScreen} />
       </>
     );
