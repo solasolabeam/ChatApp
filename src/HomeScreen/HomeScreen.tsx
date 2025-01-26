@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import Screen from '../components/Screen';
 import AuthContext from '../components/AuthContext';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../modules/Color';
+import auth from '@react-native-firebase/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -43,6 +44,10 @@ const styles = StyleSheet.create({
 const HomeScreen = () => {
   const { user: me } = useContext(AuthContext);
 
+  const onPressLogout = useCallback(() => {
+    auth().signOut();
+  }, []);
+
   if (me == null) {
     return null;
   }
@@ -55,7 +60,7 @@ const HomeScreen = () => {
             <Text style={styles.myNameText}>{me.name}</Text>
             <Text style={styles.myEmailText}>{me.email}</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onPressLogout}>
             <Text style={styles.logoutText}>로그아웃</Text>
           </TouchableOpacity>
         </View>
