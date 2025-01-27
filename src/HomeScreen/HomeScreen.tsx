@@ -1,9 +1,17 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Screen from '../components/Screen';
 import AuthContext from '../components/AuthContext';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Colors from '../modules/Color';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { Collections, User } from '../type';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,14 +47,52 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 14,
   },
+  userListSection: {
+    marginTop: 40,
+    flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 const HomeScreen = () => {
   const { user: me } = useContext(AuthContext);
-
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  console.log('user', users);
   const onPressLogout = useCallback(() => {
     auth().signOut();
   }, []);
+
+  const loadUsers = useCallback(async () => {
+    try {
+      setLoadingUsers(true);
+      const snapshot = await firestore().collection(Collections.USER).get();
+      setUsers(
+        snapshot.docs
+          .map(doc => doc.data() as User)
+          .filter(u => u.userId !== me?.userId),
+      );
+    } finally {
+      setLoadingUsers(false);
+    }
+  }, [me?.userId]);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
+
+  const renderLoading = useCallback(
+    () => (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </View>
+    ),
+    [],
+  );
 
   if (me == null) {
     return null;
@@ -63,6 +109,9 @@ const HomeScreen = () => {
           <TouchableOpacity onPress={onPressLogout}>
             <Text style={styles.logoutText}>로그아웃</Text>
           </TouchableOpacity>
+        </View>
+        <View style={styles.userListSection}>
+          {loadingUsers ? renderLoading() : null}
         </View>
       </View>
     </Screen>
