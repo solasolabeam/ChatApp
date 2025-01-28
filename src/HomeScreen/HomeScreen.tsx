@@ -75,6 +75,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.BLACK,
   },
+  separator: {
+    height: 10,
+  },
+  emptyText: {
+    color: Colors.BLACK,
+  },
 });
 
 const HomeScreen = () => {
@@ -148,6 +154,12 @@ const HomeScreen = () => {
                     <Text style={styles.otherEmailText}>{user.email}</Text>
                   </TouchableOpacity>
                 )}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListEmptyComponent={() => {
+                  return (
+                    <Text style={styles.emptyText}>사용자가 없습니다.</Text>
+                  );
+                }}
               />
             </>
           )}
