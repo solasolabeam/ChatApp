@@ -3,6 +3,7 @@ import Screen from '../components/Screen';
 import AuthContext from '../components/AuthContext';
 import {
   ActivityIndicator,
+  FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -55,6 +56,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  userList: {
+    flex: 1,
+  },
+  userListItem: {
+    backgroundColor: Colors.LIGHT_GRAY,
+    borderRadius: 12,
+    padding: 20,
+  },
+  otherNameText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.BLACK,
+  },
+  otherEmailText: {
+    marginTop: 4,
+    fontSize: 14,
+    color: Colors.BLACK,
   },
 });
 
@@ -111,7 +130,27 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.userListSection}>
-          {loadingUsers ? renderLoading() : null}
+          {loadingUsers ? (
+            renderLoading()
+          ) : (
+            <>
+              <Text style={styles.sectionTitleText}>
+                다른 사용자와 대화해보세요!
+              </Text>
+              <FlatList
+                style={styles.userList}
+                data={users}
+                renderItem={({ item: user }) => (
+                  <TouchableOpacity
+                    style={styles.userListItem}
+                    onPress={() => {}}>
+                    <Text style={styles.otherNameText}>{user.name}</Text>
+                    <Text style={styles.otherEmailText}>{user.email}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </>
+          )}
         </View>
       </View>
     </Screen>
