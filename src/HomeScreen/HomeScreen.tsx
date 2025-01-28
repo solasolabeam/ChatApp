@@ -119,9 +119,22 @@ const HomeScreen = () => {
     [],
   );
 
+  // Separator 컴포넌트 정의
+  const renderSeparator = useCallback(
+    () => <View style={styles.separator} />,
+    [],
+  );
+
+  // ListEmptyComponent 정의
+  const renderEmptyComponent = useCallback(
+    () => <Text style={styles.emptyText}>사용자가 없습니다.</Text>,
+    [],
+  );
+
   if (me == null) {
     return null;
   }
+
   return (
     <Screen title="홈">
       <View style={styles.container}>
@@ -154,12 +167,8 @@ const HomeScreen = () => {
                     <Text style={styles.otherEmailText}>{user.email}</Text>
                   </TouchableOpacity>
                 )}
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-                ListEmptyComponent={() => {
-                  return (
-                    <Text style={styles.emptyText}>사용자가 없습니다.</Text>
-                  );
-                }}
+                ItemSeparatorComponent={renderSeparator}
+                ListEmptyComponent={renderEmptyComponent}
               />
             </>
           )}
