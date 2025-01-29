@@ -12,7 +12,9 @@ import {
 import Colors from '../modules/Color';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { Collections, User } from '../type';
+import { Collections, RootStackParamList, User } from '../type';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -87,6 +89,9 @@ const HomeScreen = () => {
   const { user: me } = useContext(AuthContext);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
+  const { navigate } =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   console.log('user', users);
   const onPressLogout = useCallback(() => {
     auth().signOut();
@@ -95,7 +100,7 @@ const HomeScreen = () => {
   const loadUsers = useCallback(async () => {
     try {
       setLoadingUsers(true);
-      const snapshot = await firestore().collection(Collections.USER).get();
+      const snapshot = await firestore().collection(Collections.USERS).get();
       setUsers(
         snapshot.docs
           .map(doc => doc.data() as User)
@@ -162,7 +167,12 @@ const HomeScreen = () => {
                 renderItem={({ item: user }) => (
                   <TouchableOpacity
                     style={styles.userListItem}
-                    onPress={() => {}}>
+                    onPress={() =>
+                      navigate('Chat', {
+                        userId: [me.userId, user.userId],
+                        other: user,
+                      })
+                    }>
                     <Text style={styles.otherNameText}>{user.name}</Text>
                     <Text style={styles.otherEmailText}>{user.email}</Text>
                   </TouchableOpacity>
