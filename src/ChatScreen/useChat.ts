@@ -18,6 +18,7 @@ const useChat = (userIds: string[]) => {
   const [loadingChat, setLoadingChat] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [sending, setSending] = useState(false);
+  const [loadingMessages, setLoadingMessages] = useState(false);
 
   const loadChat = useCallback(async () => {
     try {
@@ -74,7 +75,7 @@ const useChat = (userIds: string[]) => {
         const data: FirestoreMessageData = {
           text: text,
           user: user,
-          createAt: new Date(),
+          createdAt: new Date(),
         };
         const doc = await firestore()
           .collection(Collections.CHATS)
@@ -96,12 +97,44 @@ const useChat = (userIds: string[]) => {
     },
     [chat?.id],
   );
+
+  const loadMessages = useCallback(async (chatId: string) => {
+    try {
+      setLoadingMessages(true);
+      const messagesSnap = await firestore()
+        .collection(Collections.CHATS)
+        .doc(chatId)
+        .collection(Collections.MESSAGES)
+        .orderBy('createdAt')
+        .get();
+
+      const ms = messagesSnap.docs.map<Message>(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          user: data.user,
+          text: data.text,
+          createdAt: data.createdAt.toDate(),
+        };
+      });
+      setMessages(ms);
+    } finally {
+      setLoadingMessages(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (chat?.id != null) {
+      loadMessages(chat.id);
+    }
+  }, [chat?.id, loadMessages]);
   return {
     chat,
     loadingChat,
     sendMessage,
     messages,
     sending,
+    loadingMessages,
   };
 };
 
