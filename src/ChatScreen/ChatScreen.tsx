@@ -10,6 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Colors from '../modules/Color';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +20,30 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  chatContainer: {
+    flex: 1,
+    padding: 20,
+  },
+  membersSection: {},
+  membersTitleText: {
+    fontSize: 16,
+    color: Colors.BLACK,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  userProfile: {
+    width: 34,
+    height: 34,
+    borderRadius: 34 / 2,
+    backgroundColor: Colors.BLACK,
+    borderWidth: 1,
+    borderColor: Colors.LIGHT_GRAY,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  userProfileText: {
+    color: Colors.WHITE,
   },
 });
 
@@ -42,11 +67,12 @@ const ChatScreen = () => {
                 <Text style={styles.userProfileText}>{user.name[0]}</Text>
               </View>
             )}
+            horizontal
           />
         </View>
       </View>
     );
-  }, []);
+  }, [chat]);
 
   return (
     <Screen title={other.name}>
