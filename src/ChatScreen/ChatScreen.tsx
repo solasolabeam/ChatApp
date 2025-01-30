@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import Colors from '../modules/Color';
+import Icon from '@react-native-vector-icons/material-design-icons';
 
 const styles = StyleSheet.create({
   container: {
@@ -77,8 +78,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50 / 2,
   },
-  sendText: {
+  sendIcon: {
     color: Colors.WHITE,
+    fontSize: 18,
   },
 });
 
@@ -137,10 +139,9 @@ const ChatScreen = () => {
             style={sendDisabled ? disabledSendButtonStyle : styles.sendButton}
             disabled={sendDisabled}
             onPress={onPressSendButton}>
-            <Text style={styles.sendText}>Send</Text>
+            <Icon style={styles.sendIcon} name="send" />
           </TouchableOpacity>
         </View>
-        😃
       </View>
     );
   }, [chat, onChangeText, text, sendDisabled, onPressSendButton]);
