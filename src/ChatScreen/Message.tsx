@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BLACK,
     borderRadius: 12,
     padding: 12,
+    flexShrink: 1,
   },
   messageText: {
     fontSize: 14,

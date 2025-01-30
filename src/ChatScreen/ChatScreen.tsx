@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   },
   messageList: {
     flex: 1,
+    marginVertical: 20,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -83,6 +84,9 @@ const styles = StyleSheet.create({
   sendIcon: {
     color: Colors.WHITE,
     fontSize: 18,
+  },
+  messageSeperator: {
+    height: 8,
   },
 });
 
@@ -152,6 +156,9 @@ const ChatScreen = () => {
               />
             );
           }}
+          ItemSeparatorComponent={() => (
+            <View style={styles.messageSeperator} />
+          )}
         />
         <View style={styles.inputContainer}>
           <View style={styles.textInputContainer}>
