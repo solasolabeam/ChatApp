@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           await auth().createUserWithEmailAndPassword(email, password);
         await currentUser.updateProfile({ displayName: name });
         await firestore()
-          .collection(Collections.USER)
+          .collection(Collections.USERS)
           .doc(currentUser.uid)
           .set({
             userId: currentUser.uid,
