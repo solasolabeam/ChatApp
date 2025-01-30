@@ -140,6 +140,7 @@ const ChatScreen = () => {
             <Text style={styles.sendText}>Send</Text>
           </TouchableOpacity>
         </View>
+        😃
       </View>
     );
   }, [chat, onChangeText, text, sendDisabled, onPressSendButton]);

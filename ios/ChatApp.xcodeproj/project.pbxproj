@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DC477B5488ABF8A469723AB /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA125B067D12C49434F1DB99 /* Pods_ChatApp.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9C090BA52D4B6D09003E8DE2 /* MaterialDesignIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C090BA32D4B6D09003E8DE2 /* MaterialDesignIcons.ttf */; };
 		9C9EDD6C2D3FCE9900D9AC49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C9EDD6B2D3FCE9900D9AC49 /* GoogleService-Info.plist */; };
 		EC1D13D54E678E94EE39A935 /* Pods_ChatApp_ChatAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F358581B3FDC1C93ED5D575 /* Pods_ChatApp_ChatAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		6F358581B3FDC1C93ED5D575 /* Pods_ChatApp_ChatAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp_ChatAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ChatApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ChatApp-ChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp-ChatAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChatApp-ChatAppTests/Pods-ChatApp-ChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		9C090BA32D4B6D09003E8DE2 /* MaterialDesignIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialDesignIcons.ttf; sourceTree = "<group>"; };
 		9C9EDD6B2D3FCE9900D9AC49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FA125B067D12C49434F1DB99 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				9C090BA42D4B6D09003E8DE2 /* fonts */,
 			);
 			name = ChatApp;
 			sourceTree = "<group>";
@@ -141,6 +144,14 @@
 				00E356EE1AD99517003FC87E /* ChatAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9C090BA42D4B6D09003E8DE2 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9C090BA32D4B6D09003E8DE2 /* MaterialDesignIcons.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -249,6 +260,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				9C9EDD6C2D3FCE9900D9AC49 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				9C090BA52D4B6D09003E8DE2 /* MaterialDesignIcons.ttf in Resources */,
 				005447FD33D1C78F353E343E /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
