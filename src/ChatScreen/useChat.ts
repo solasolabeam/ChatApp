@@ -113,7 +113,6 @@ const useChat = (userIds: string[]) => {
           createdAt: data.createdAt.toDate(),
         };
       });
-      console.log('ms', ms);
       setMessages(ms);
     } finally {
       setLoadingMessages(false);
