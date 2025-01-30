@@ -92,7 +92,6 @@ const HomeScreen = () => {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  console.log('user', users);
   const onPressLogout = useCallback(() => {
     auth().signOut();
   }, []);
