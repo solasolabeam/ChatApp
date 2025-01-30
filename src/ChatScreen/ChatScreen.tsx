@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import Screen from '../components/Screen';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../type';
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   textInputContainer: {
     flex: 1,
@@ -68,13 +69,32 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
   },
+  sendButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.BLACK,
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2,
+  },
+  sendText: {
+    color: Colors.WHITE,
+  },
 });
+
+const disabledSendButtonStyle = [
+  styles.sendButton,
+  { backgroundColor: Colors.GRAY },
+];
 
 const ChatScreen = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'Chat'>>();
   const { other, userIds } = params;
   const { loadingChat, chat } = useChat(userIds);
   const [text, setText] = useState('');
+
+  const sendDisabled = useMemo(() => text.length === 0, [text]);
+
   const onChangeText = useCallback((newText: string) => {
     setText(newText);
   }, []);
@@ -108,13 +128,15 @@ const ChatScreen = () => {
               multiline
             />
           </View>
-          <TouchableOpacity style={styles.sendButton}>
-            <Text>Send</Text>
+          <TouchableOpacity
+            style={sendDisabled ? disabledSendButtonStyle : styles.sendButton}
+            disabled={sendDisabled}>
+            <Text style={styles.sendText}>Send</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
-  }, [chat, onChangeText, text]);
+  }, [chat, onChangeText, text, sendDisabled]);
 
   return (
     <Screen title={other.name}>
