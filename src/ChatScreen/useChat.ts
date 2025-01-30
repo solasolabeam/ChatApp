@@ -24,7 +24,7 @@ const useChat = (userIds: string[]) => {
         setChat({
           id: doc.id,
           userIds: doc.data().userIds as string[],
-          users: doc.data().userId as User[],
+          users: doc.data().users as User[],
         });
         return;
       }
@@ -52,9 +52,9 @@ const useChat = (userIds: string[]) => {
     loadChat();
   }, [loadChat]);
 
-  useEffect(() => {
-    console.log(chat);
-  }, [chat]);
+  //   useEffect(() => {
+  //     console.log(chat);
+  //   }, [chat]);
 
   return {
     chat,
