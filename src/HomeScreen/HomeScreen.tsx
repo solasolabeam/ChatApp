@@ -169,7 +169,7 @@ const HomeScreen = () => {
                     style={styles.userListItem}
                     onPress={() =>
                       navigate('Chat', {
-                        userId: [me.userId, user.userId],
+                        userIds: [me.userId, user.userId],
                         other: user,
                       })
                     }>

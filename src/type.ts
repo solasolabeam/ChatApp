@@ -4,7 +4,7 @@ export type RootStackParamList = {
   Home: undefined;
   Loading: undefined;
   Chat: {
-    userId: string[];
+    userIds: string[];
     other: User;
   };
 };
