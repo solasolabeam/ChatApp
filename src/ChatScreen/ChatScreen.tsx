@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import Screen from '../components/Screen';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../type';
@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Colors from '../modules/Color';
 import Icon from '@react-native-vector-icons/material-design-icons';
+import AuthContext from '../components/AuthContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -92,8 +93,9 @@ const disabledSendButtonStyle = [
 const ChatScreen = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'Chat'>>();
   const { other, userIds } = params;
-  const { loadingChat, chat } = useChat(userIds);
+  const { loadingChat, chat, sendMessage } = useChat(userIds);
   const [text, setText] = useState('');
+  const { user: me } = useContext(AuthContext);
 
   const sendDisabled = useMemo(() => text.length === 0, [text]);
 
@@ -103,8 +105,11 @@ const ChatScreen = () => {
 
   const onPressSendButton = useCallback(() => {
     //TODO: send text message
-    setText('');
-  }, []);
+    if (me != null) {
+      sendMessage(text, me);
+      setText('');
+    }
+  }, [me, sendMessage, text]);
   console.log('chat.users', chat?.users);
 
   const renderChat = useCallback(() => {
