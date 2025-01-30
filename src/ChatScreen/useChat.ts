@@ -31,7 +31,7 @@ const useChat = (userIds: string[]) => {
 
       const usersSnapShot = await firestore()
         .collection(Collections.USERS)
-        .where('userid', 'in', userIds)
+        .where('userId', 'in', userIds)
         .get();
       const users = usersSnapShot.docs.map(doc => doc.data() as User);
       const data = {
@@ -51,6 +51,10 @@ const useChat = (userIds: string[]) => {
   useEffect(() => {
     loadChat();
   }, [loadChat]);
+
+  useEffect(() => {
+    console.log(chat);
+  }, [chat]);
 
   return {
     chat,
