@@ -133,6 +133,7 @@ const ChatScreen = () => {
           />
         </View>
         <FlatList
+          inverted
           style={styles.messageList}
           data={messages}
           renderItem={({ item: message }) => {
