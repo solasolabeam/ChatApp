@@ -54,7 +54,7 @@ const useChat = (userIds: string[]) => {
 
   return {
     chat,
-    loadChat,
+    loadingChat,
   };
 };
 
