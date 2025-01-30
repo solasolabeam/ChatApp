@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   timeText: {
     fontSize: 12,
@@ -38,19 +39,28 @@ const styles = StyleSheet.create({
   },
 });
 
+const otherMessageStyles = {
+  container: [styles.container, { alignItems: 'flex-start' as const }],
+  bubble: [styles.bubble, { backgroundColor: Colors.LIGHT_GRAY }],
+  messageText: [styles.messageText, { color: Colors.BLACK }],
+  timeText: [styles.timeText, { marginRight: 0, marginLeft: 4 }],
+};
+
 const Message = ({ name, text, createdAt, isOtherMessage }: MessageProps) => {
+  const messageStyles = isOtherMessage ? otherMessageStyles : styles;
   const renderMessageContainer = useCallback(() => {
-    return (
-      <>
-        <Text style={styles.timeText}>{moment(createdAt).format('HH:mm')}</Text>
-        <View style={styles.bubble}>
-          <Text style={styles.messageText}>{text}</Text>
-        </View>
-      </>
-    );
-  }, [createdAt, text]);
+    const component = [
+      <Text key="textText" style={messageStyles.timeText}>
+        {moment(createdAt).format('HH:mm')}
+      </Text>,
+      <View key="message" style={messageStyles.bubble}>
+        <Text style={messageStyles.messageText}>{text}</Text>
+      </View>,
+    ];
+    return isOtherMessage ? component.reverse() : component;
+  }, [createdAt, text, messageStyles, isOtherMessage]);
   return (
-    <View style={styles.container}>
+    <View style={messageStyles.container}>
       <Text style={styles.nameText}>{name}</Text>
       <View style={styles.messageContainer}>{renderMessageContainer()}</View>
     </View>
