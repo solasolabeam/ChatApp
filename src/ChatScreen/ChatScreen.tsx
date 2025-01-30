@@ -98,6 +98,11 @@ const ChatScreen = () => {
   const onChangeText = useCallback((newText: string) => {
     setText(newText);
   }, []);
+
+  const onPressSendButton = useCallback(() => {
+    //TODO: send text message
+    setText('');
+  }, []);
   console.log('chat.users', chat?.users);
 
   const renderChat = useCallback(() => {
@@ -130,13 +135,14 @@ const ChatScreen = () => {
           </View>
           <TouchableOpacity
             style={sendDisabled ? disabledSendButtonStyle : styles.sendButton}
-            disabled={sendDisabled}>
+            disabled={sendDisabled}
+            onPress={onPressSendButton}>
             <Text style={styles.sendText}>Send</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
-  }, [chat, onChangeText, text, sendDisabled]);
+  }, [chat, onChangeText, text, sendDisabled, onPressSendButton]);
 
   return (
     <Screen title={other.name}>
