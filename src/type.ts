@@ -31,11 +31,11 @@ export interface Message {
   id: string;
   user: User;
   text: string;
-  createAt: Date;
+  createdAt: Date;
 }
 
 export interface FirestoreMessageData {
   text: string;
   user: User;
-  createAt: Date;
+  createdAt: Date;
 }
