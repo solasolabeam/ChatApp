@@ -61,10 +61,6 @@ const useChat = (userIds: string[]) => {
     loadChat();
   }, [loadChat]);
 
-  //   useEffect(() => {
-  //     console.log(chat);
-  //   }, [chat]);
-
   const sendMessage = useCallback(
     async (text: string, user: User) => {
       if (chat?.id == null) {
@@ -117,6 +113,7 @@ const useChat = (userIds: string[]) => {
           createdAt: data.createdAt.toDate(),
         };
       });
+      console.log('ms', ms);
       setMessages(ms);
     } finally {
       setLoadingMessages(false);

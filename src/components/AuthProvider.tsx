@@ -13,7 +13,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const unsubsribe = auth().onUserChanged(async fbUser => {
-      console.log('fbUser', fbUser);
       if (fbUser != null) {
         //login
         setUser({

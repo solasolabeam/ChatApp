@@ -93,10 +93,11 @@ const disabledSendButtonStyle = [
 const ChatScreen = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'Chat'>>();
   const { other, userIds } = params;
-  const { loadingChat, chat, sendMessage } = useChat(userIds);
+  const { loadingChat, chat, sendMessage, messages } = useChat(userIds);
   const [text, setText] = useState('');
   const { user: me } = useContext(AuthContext);
 
+  console.log('messages', messages);
   const sendDisabled = useMemo(() => text.length === 0, [text]);
 
   const onChangeText = useCallback((newText: string) => {
@@ -110,7 +111,6 @@ const ChatScreen = () => {
       setText('');
     }
   }, [me, sendMessage, text]);
-  console.log('chat.users', chat?.users);
 
   const renderChat = useCallback(() => {
     if (chat == null) {
