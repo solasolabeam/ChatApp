@@ -95,6 +95,8 @@ const disabledSendButtonStyle = [
   { backgroundColor: Colors.GRAY },
 ];
 
+const MessageSeparator = () => <View style={styles.messageSeperator} />;
+
 const ChatScreen = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'Chat'>>();
   const { other, userIds } = params;
@@ -104,7 +106,6 @@ const ChatScreen = () => {
   const { user: me } = useContext(AuthContext);
   const loading = loadingChat || loadingMessages;
 
-  console.log('messages', messages);
   const sendDisabled = useMemo(() => text.length === 0, [text]);
 
   const onChangeText = useCallback((newText: string) => {
@@ -156,9 +157,7 @@ const ChatScreen = () => {
               />
             );
           }}
-          ItemSeparatorComponent={() => (
-            <View style={styles.messageSeperator} />
-          )}
+          ItemSeparatorComponent={MessageSeparator}
         />
         <View style={styles.inputContainer}>
           <View style={styles.textInputContainer}>
