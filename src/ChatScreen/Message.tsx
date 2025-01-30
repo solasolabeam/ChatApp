@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Colors from '../modules/Color';
 
 interface MessageProps {
   name: string;
@@ -9,7 +10,33 @@ interface MessageProps {
   isOtherMessage: boolean;
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'flex-end',
+  },
+  nameText: {
+    fontSize: 12,
+    color: Colors.GRAY,
+    marginBottom: 4,
+  },
+  messageContainer: {
+    flexDirection: 'row',
+  },
+  timeText: {
+    fontSize: 12,
+    color: Colors.GRAY,
+    marginRight: 4,
+  },
+  bubble: {
+    backgroundColor: Colors.BLACK,
+    borderRadius: 12,
+    padding: 12,
+  },
+  messageText: {
+    fontSize: 14,
+    color: Colors.WHITE,
+  },
+});
 
 const Message = ({ name, text, createdAt, isOtherMessage }: MessageProps) => {
   const renderMessageContainer = useCallback(() => {
