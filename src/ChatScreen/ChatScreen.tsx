@@ -15,6 +15,7 @@ import {
 import Colors from '../modules/Color';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import AuthContext from '../components/AuthContext';
+import Message from './Message';
 
 const styles = StyleSheet.create({
   container: {
@@ -138,11 +139,17 @@ const ChatScreen = () => {
           data={messages}
           renderItem={({ item: message }) => {
             return (
-              <View>
-                <Text>{message.user.name}</Text>
-                <Text>{message.text}</Text>
-                <Text>{message.createdAt.toISOString()}</Text>
-              </View>
+              // <View>
+              //   <Text>{message.user.name}</Text>
+              //   <Text>{message.text}</Text>
+              //   <Text>{message.createdAt.toISOString()}</Text>
+              // </View>
+              <Message
+                name={message.user.name}
+                text={message.text}
+                createdAt={message.createdAt}
+                isOtherMessage={message.user.userId !== me?.userId}
+              />
             );
           }}
         />
@@ -164,7 +171,15 @@ const ChatScreen = () => {
         </View>
       </View>
     );
-  }, [chat, onChangeText, text, sendDisabled, onPressSendButton, messages]);
+  }, [
+    chat,
+    onChangeText,
+    text,
+    sendDisabled,
+    onPressSendButton,
+    messages,
+    me?.userId,
+  ]);
 
   return (
     <Screen title={other.name}>
