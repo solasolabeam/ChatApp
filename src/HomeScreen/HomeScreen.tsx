@@ -121,6 +121,8 @@ const HomeScreen = () => {
     loadUsers();
   }, [loadUsers]);
 
+  const onPressProfile = useCallback(() => {}, []);
+
   const renderLoading = useCallback(
     () => (
       <View style={styles.loadingContainer}>
@@ -151,7 +153,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <Text style={styles.sectionTitleText}>나의 정보</Text>
         <View style={styles.userSectionContent}>
-          <TouchableOpacity style={styles.profile} />
+          <TouchableOpacity style={styles.profile} onPress={onPressProfile} />
           <View style={styles.myProfile}>
             <Text style={styles.myNameText}>{me.name}</Text>
             <Text style={styles.myEmailText}>{me.email}</Text>
