@@ -15,6 +15,7 @@ import firestore from '@react-native-firebase/firestore';
 import { Collections, RootStackParamList, User } from '../type';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +122,14 @@ const HomeScreen = () => {
     loadUsers();
   }, [loadUsers]);
 
-  const onPressProfile = useCallback(() => {}, []);
+  const onPressProfile = useCallback(async () => {
+    //TODO
+    const image = await ImageCropPicker.openPicker({
+      cropping: true,
+    });
+
+    console.log('image', image);
+  }, []);
 
   const renderLoading = useCallback(
     () => (
