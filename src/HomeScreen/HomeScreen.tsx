@@ -83,6 +83,13 @@ const styles = StyleSheet.create({
   emptyText: {
     color: Colors.BLACK,
   },
+  profile: {
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: Colors.GRAY,
+    marginRight: 10,
+  },
 });
 
 const HomeScreen = () => {
@@ -144,6 +151,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <Text style={styles.sectionTitleText}>나의 정보</Text>
         <View style={styles.userSectionContent}>
+          <TouchableOpacity style={styles.profile} />
           <View style={styles.myProfile}>
             <Text style={styles.myNameText}>{me.name}</Text>
             <Text style={styles.myEmailText}>{me.email}</Text>
