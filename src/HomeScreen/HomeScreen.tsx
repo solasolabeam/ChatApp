@@ -126,6 +126,7 @@ const HomeScreen = () => {
     //TODO
     const image = await ImageCropPicker.openPicker({
       cropping: true,
+      cropperCircleOverlay: true,
     });
 
     console.log('image', image);
