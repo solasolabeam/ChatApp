@@ -1,79 +1,60 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MyChatApp: 나만의 채팅앱
 
-# Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## 프로젝트 소개
 
-## Step 1: Start the Metro Server
+> 이 채팅앱은 Firestore를 이용한 실시간 메시징 기능과 Firestore Authentication을 활용한 사용자 인증을 지원하는 React Native CLI 기반의 애플리케이션이다. 익숙한 UI/UX로 누구나 쉽게 사용할 수 있으며, Firebase의 실시간 데이터 동기화 기능을 활용하여 원활한 채팅 경험을 제공한다.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 기술 스택
 
-To start Metro, run the following command from the _root_ of your React Native project:
+> `React Native CLI`, `Firebase Firestore`, `Firestore Authentication`, `React Context API`, `Firebase Cloud Messaging`
 
-```bash
-# using npm
-npm start
 
-# OR using Yarn
-yarn start
-```
+## 주요 기능
+- **회원가입 및 로그인**: Firestore Authentication을 이용한 사용자 인증
+- **실시간 채팅**: Firestore onSnapshot을 활용하여 메시지 실시간 반영
+- **1:1 채팅 및 그룹 채팅**
+- **프로필 관리**: 사용자의 닉네임, 프로필 사진 변경 기능 (작업 중)
+- **읽음 표시**: 메시지 읽음/안 읽음 상태 확인 (적용 예정)
+- **푸시 알림** (적용 예정)
 
-## Step 2: Start your Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## 성과
+✅ Firestore onSnapshot을 활용하여 실시간 메시지 동기화 구현
 
-### For Android
+✅ Firestore Authentication을 적용하여 안전한 사용자 인증 및 관리
 
-```bash
-# using npm
-npm run android
+✅ React Native CLI 기반으로 개발하여 성능 최적화 및 네이티브 기능 활용
 
-# OR using Yarn
-yarn android
-```
+✅ Firebase를 활용한 백엔드 구축으로 서버리스 환경에서의 개발 경험 축적
 
-### For iOS
 
-```bash
-# using npm
-npm run ios
+## 프로젝트 구성
+### 로그인 / 회원가입 페이지
 
-# OR using Yarn
-yarn ios
-```
+- Firestore Authentication을 이용하여 이메일/비밀번호 로그인 
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+![](https://velog.velcdn.com/images/so2i/post/04e1dc9f-0625-439d-894f-e6b52a169052/image.gif) | ![](https://velog.velcdn.com/images/so2i/post/ef1facd4-e547-4cd6-ba01-b2925c3e9563/image.gif) 
+--- | --- |
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+### 사용자 리스트
 
-Now that you have successfully run the app, let's modify it.
+- 현재 활동중인 사용자의 리스트를 표시
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+<img src="https://velog.velcdn.com/images/so2i/post/f7c75c1f-faf8-4095-9938-063865efddbf/image.png" width="50%" height="50%">
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-## Congratulations! :tada:
 
-You've successfully run and modified your React Native App. :partying_face:
+### 채팅방 페이지
 
-### Now what?
+- Firestore onSnapshot을 이용하여 실시간 채팅 구현
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+<img src="https://velog.velcdn.com/images/so2i/post/71212397-f9ce-41e7-a519-61762c1cc259/image.gif" width="100%" height="80%">
 
-# Troubleshooting
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### 프로필 페이지 (작업 중)
 
-# Learn More
+- 사용자 프로필 수정 (닉네임, 프로필 사진)
 
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+<img src="https://velog.velcdn.com/images/so2i/post/9435ab71-6cb2-44dc-ac1c-08a8f694bbaf/image.gif" width="50%" height="50%">
