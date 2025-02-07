@@ -16,6 +16,7 @@ import { Collections, RootStackParamList, User } from '../type';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import Profile from './Profile';
 
 const styles = StyleSheet.create({
   container: {
@@ -85,10 +86,6 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
   profile: {
-    width: 48,
-    height: 48,
-    borderRadius: 48 / 2,
-    backgroundColor: Colors.GRAY,
     marginRight: 10,
   },
 });
@@ -163,7 +160,11 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <Text style={styles.sectionTitleText}>나의 정보</Text>
         <View style={styles.userSectionContent}>
-          <TouchableOpacity style={styles.profile} onPress={onPressProfile} />
+          <Profile
+            style={styles.profile}
+            onPress={onPressProfile}
+            imageUrl={me.profileUrl}
+          />
           <View style={styles.myProfile}>
             <Text style={styles.myNameText}>{me.name}</Text>
             <Text style={styles.myEmailText}>{me.email}</Text>
