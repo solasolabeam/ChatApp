@@ -13,6 +13,7 @@ export interface User {
   userId: string;
   email: string;
   name: string;
+  profileUrl: string;
 }
 
 export enum Collections {
@@ -25,7 +26,6 @@ export interface Chat {
   id: string;
   userIds: string[];
   users: User[];
-  profileUrl?: string;
 }
 
 export interface Message {

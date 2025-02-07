@@ -21,6 +21,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           userId: fbUser.uid,
           email: fbUser.email ?? '',
           name: fbUser.displayName ?? '',
+          profileUrl: fbUser.photoURL ?? '',
         });
       } else {
         //logout
