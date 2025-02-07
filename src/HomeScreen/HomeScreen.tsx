@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = () => {
-  const { user: me } = useContext(AuthContext);
+  const { user: me, updateProfileImage } = useContext(AuthContext);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
   const { navigate } =
@@ -130,7 +130,8 @@ const HomeScreen = () => {
     });
 
     console.log('image', image);
-  }, []);
+    await updateProfileImage(image.path);
+  }, [updateProfileImage]);
 
   const renderLoading = useCallback(
     () => (
