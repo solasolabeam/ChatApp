@@ -25,6 +25,7 @@ export interface Chat {
   id: string;
   userIds: string[];
   users: User[];
+  profileUrl?: string;
 }
 
 export interface Message {
