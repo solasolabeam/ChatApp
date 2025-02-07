@@ -1162,6 +1162,9 @@ PODS:
   - Firebase/Firestore (11.7.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 11.7.0)
+  - Firebase/Storage (11.7.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 11.7.0)
   - FirebaseAppCheckInterop (11.7.0)
   - FirebaseAuth (11.7.0):
     - FirebaseAppCheckInterop (~> 11.0)
@@ -1202,6 +1205,13 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (~> 3.30910.0)
   - FirebaseSharedSwift (11.7.0)
+  - FirebaseStorage (11.7.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.7.0)
+    - FirebaseCoreExtension (~> 11.7.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - fmt (9.1.0)
   - glog (0.3.5)
   - GoogleUtilities/AppDelegateSwizzler (8.0.2):
@@ -2869,15 +2879,19 @@ PODS:
     - React-perflogger (= 0.76.6)
     - React-utils (= 0.76.6)
   - RecaptchaInterop (100.0.0)
-  - RNFBApp (21.7.1):
+  - RNFBApp (21.7.2):
     - Firebase/CoreOnly (= 11.7.0)
     - React-Core
-  - RNFBAuth (21.7.1):
+  - RNFBAuth (21.7.2):
     - Firebase/Auth (= 11.7.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (21.7.1):
+  - RNFBFirestore (21.7.2):
     - Firebase/Firestore (= 11.7.0)
+    - React-Core
+    - RNFBApp
+  - RNFBStorage (21.7.2):
+    - Firebase/Storage (= 11.7.0)
     - React-Core
     - RNFBApp
   - RNImageCropPicker (0.42.0):
@@ -3007,6 +3021,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -3025,6 +3040,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseFirestoreInternal
     - FirebaseSharedSwift
+    - FirebaseStorage
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -3166,6 +3182,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/auth"
   RNFBFirestore:
     :path: "../node_modules/@react-native-firebase/firestore"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNScreens:
@@ -3189,6 +3207,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: e8528981558d50872e24119b9448b18e86cab9f6
   FirebaseFirestoreInternal: 953e31e70db09d928b927b65761171c680d2ea9b
   FirebaseSharedSwift: a45efd84d60ebbfdcdbaebc66948af3630459e62
+  FirebaseStorage: d35da127dd49edcbd07b8c07cf651a70161558b2
   fmt: 10c6e61f4be25dc963c36bd73fc7b1705fe975be
   glog: 08b301085f15bcbb6ff8632a8ebaf239aae04e6a
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
@@ -3255,9 +3274,10 @@ SPEC CHECKSUMS:
   ReactCodegen: cc574544cbbd21387150a35c7c887592d3895eed
   ReactCommon: f1d85fe3ebf537d99ab8e1bda151f2c511878537
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RNFBApp: 67229e8085ab427c935defad2a6c3fc57c7f656d
-  RNFBAuth: 13f641fec88aee849a628b54332425b2e36f14db
-  RNFBFirestore: 2e4b7bf2824bb68bce11e1036413d4ae49c16343
+  RNFBApp: a5395f4df3ea5d19697bdc99f5a0400903e5fff6
+  RNFBAuth: 4ec44f6bed849d3ac4a8da118bbe0a6109fa2e66
+  RNFBFirestore: 077b72bcdc30bed54b7498dbf143f6b8d8742f2c
+  RNFBStorage: 2a8cbadb56f1888155f6497d81c6d53e1e9e833b
   RNImageCropPicker: 64b6bec9ec185ee59b71a93d7058816bd0e1916e
   RNScreens: c9b0795316830a7fe2e2ef2093b9fb5c78fd33c8
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
