@@ -16,6 +16,7 @@ import Colors from '../modules/Color';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import AuthContext from '../components/AuthContext';
 import Message from './Message';
+import UserPhoto from '../components/UserPhoto';
 
 const styles = StyleSheet.create({
   container: {
@@ -131,9 +132,13 @@ const ChatScreen = () => {
           <FlatList
             data={chat.users}
             renderItem={({ item: user }) => (
-              <View style={styles.userProfile}>
-                <Text style={styles.userProfileText}>{user.name[0]}</Text>
-              </View>
+              <UserPhoto
+                size={24}
+                style={styles.userProfile}
+                name={user.name}
+                nameStyle={styles.userProfileText}
+                imageUrl={user.profileUrl}
+              />
             )}
             horizontal
           />
