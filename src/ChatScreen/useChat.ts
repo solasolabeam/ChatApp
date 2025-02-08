@@ -26,6 +26,15 @@ const useChat = (userIds: string[]) => {
     });
   }, []);
 
+  const loadUsers = async (uIds: string[]) => {
+    const usersSnapShot = await firestore()
+      .collection(Collections.USERS)
+      .where('userId', 'in', uIds)
+      .get();
+    const users = usersSnapShot.docs.map<User>(doc => doc.data() as User);
+    return users;
+  };
+
   const loadChat = useCallback(async () => {
     try {
       setLoadingChat(true);
@@ -44,11 +53,7 @@ const useChat = (userIds: string[]) => {
         return;
       }
 
-      const usersSnapShot = await firestore()
-        .collection(Collections.USERS)
-        .where('userId', 'in', userIds)
-        .get();
-      const users = usersSnapShot.docs.map(doc => doc.data() as User);
+      const users = await loadUsers(userIds);
       const data = {
         userIds: getChatKey(userIds),
         users,
