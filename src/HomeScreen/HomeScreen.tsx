@@ -17,6 +17,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import Profile from './Profile';
+import UserPhoto from '../components/UserPhoto';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,6 +69,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHT_GRAY,
     borderRadius: 12,
     padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   otherNameText: {
     fontSize: 16,
@@ -86,6 +89,9 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
   profile: {
+    marginRight: 10,
+  },
+  userPhoto: {
     marginRight: 10,
   },
 });
@@ -193,8 +199,15 @@ const HomeScreen = () => {
                         other: user,
                       })
                     }>
-                    <Text style={styles.otherNameText}>{user.name}</Text>
-                    <Text style={styles.otherEmailText}>{user.email}</Text>
+                    <UserPhoto
+                      style={styles.userPhoto}
+                      imageUrl={user.profileUrl}
+                      name={user.name}
+                    />
+                    <View>
+                      <Text style={styles.otherNameText}>{user.name}</Text>
+                      <Text style={styles.otherEmailText}>{user.email}</Text>
+                    </View>
                   </TouchableOpacity>
                 )}
                 ItemSeparatorComponent={renderSeparator}
