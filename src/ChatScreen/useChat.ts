@@ -45,10 +45,13 @@ const useChat = (userIds: string[]) => {
 
       if (chatSnapShot.docs.length > 0) {
         const doc = chatSnapShot.docs[0];
+        const chatUserIds = doc.data().userIds as string[];
+        const users = await loadUsers(chatUserIds);
+
         setChat({
           id: doc.id,
           userIds: doc.data().userIds as string[],
-          users: doc.data().users as User[],
+          users: users,
         });
         return;
       }
