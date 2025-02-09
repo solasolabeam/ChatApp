@@ -148,6 +148,7 @@ const ChatScreen = () => {
           style={styles.messageList}
           data={messages}
           renderItem={({ item: message }) => {
+            chat.users.find(u => u.userId === message.user.userId);
             return (
               // <View>
               //   <Text>{message.user.name}</Text>
@@ -159,6 +160,7 @@ const ChatScreen = () => {
                 text={message.text}
                 createdAt={message.createdAt}
                 isOtherMessage={message.user.userId !== me?.userId}
+                imageUrl={message.user.profileUrl}
               />
             );
           }}
